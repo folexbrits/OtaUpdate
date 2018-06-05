@@ -1,3 +1,7 @@
 /app/build/*
+/app/build/intermediates/*
 /.gradle/*
 /output/OtaUpdate.apk
+*.class
+*.lock
+/app/build/intermediates/classes/debug/*
