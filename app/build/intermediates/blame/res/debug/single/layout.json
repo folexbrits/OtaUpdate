@@ -1,0 +1,14 @@
+[
+    {
+        "merged": "E:\\GitProject\\OtaUpdate1\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_update_install.xml",
+        "source": "E:\\GitProject\\OtaUpdate1\\app\\src\\main\\res\\layout\\activity_update_install.xml"
+    },
+    {
+        "merged": "E:\\GitProject\\OtaUpdate1\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_check_update.xml",
+        "source": "E:\\GitProject\\OtaUpdate1\\app\\src\\main\\res\\layout\\activity_check_update.xml"
+    },
+    {
+        "merged": "E:\\GitProject\\OtaUpdate1\\app\\build\\intermediates\\res\\merged\\debug\\layout\\fragment_check_update.xml",
+        "source": "E:\\GitProject\\OtaUpdate1\\app\\src\\main\\res\\layout\\fragment_check_update.xml"
+    }
+]

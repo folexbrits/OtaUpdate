@@ -1,0 +1,87 @@
+apply plugin: 'com.android.application'
+
+
+//打包的输出路径 for default
+ext.appReleaseDir = ""
+
+// 加载版本信息配置文件方法
+def loadProperties() {
+    def proFile = file("../local.properties")
+    Properties pro = new Properties()
+    proFile.withInputStream { stream ->
+        pro.load(stream)
+    }
+    appReleaseDir = pro.appInsideReleaseDir
+}
+//加载版本信息
+loadProperties()
+
+dependencies {
+    compile fileTree(include: '*.jar', dir: 'libs')
+    // classpath 'com.android.tools.build:gradle:2.2.1'
+}
+
+
+android {
+    compileSdkVersion 17
+    buildToolsVersion "25.0.2"
+
+    defaultConfig {
+        applicationId "com.godinsec.otaupdate"
+        minSdkVersion 14
+        targetSdkVersion 17
+        multiDexEnabled true
+    }
+
+    defaultConfig {
+        multiDexEnabled true
+    }
+
+    signingConfigs {
+        release {
+            storeFile file('E:/GitProject/OtaUpdate1/output/signed/a20_ota.jks')
+            storePassword 'zkar123'
+            keyAlias 'a20_ota'
+            keyPassword 'zkar123'
+        }
+        debug {
+            storeFile file('E:/GitProject/OtaUpdate1/output/signed/a20_ota.jks')
+            storePassword 'zkar123'
+            keyAlias 'a20_ota'
+            keyPassword 'zkar123'
+        }
+    }
+
+    lintOptions {
+        abortOnError false
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-project.txt'
+            signingConfig signingConfigs.release
+        }
+        debug {
+            multiDexEnabled true
+            minifyEnabled false
+            zipAlignEnabled true
+            // 移除无用的resource文件
+            shrinkResources false
+            //前一部分代表系统默认的android程序的混淆文件，该文件已经包含了基本的混淆声明
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-project.txt'
+            signingConfig signingConfigs.debug
+        }
+    }
+
+
+    //编译完开始输入apk
+    applicationVariants.all { variant ->
+        variant.outputs.each { output ->
+            //开始输出,自定义输出路径
+            output.outputFile =
+                    new File(appReleaseDir + "/OtaUpdate.apk")
+        }
+    }
+    productFlavors {
+    }
+}
